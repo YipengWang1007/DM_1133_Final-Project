@@ -3,26 +3,36 @@ var playerImage;
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
-	background(color(153,255,255));
 	
-	playerImage= loadImage('player.png');
-	player = createSprite(400,650);
+	
+	playerImage= loadImage('1.png');
+	player = createSprite(400,515);
   player.maxSpeed = 10;
-
+	player.addAnimation('stand','1.png');
+	player.addAnimation('moving','1.png','2.png','4.png','2.png','3.png');
   player.addImage('normal', playerImage);
+}
+function preload(){
+	
 }
 
 function draw() {
-	ground(700);
+	
 	
 	if(keyDown(LEFT_ARROW)){
-		player.setVelocity(-1,0);
+		player.mirrorX(-1);
+		player.changeAnimation('moving');
+		player.setVelocity(-2,0);
 		
 	}
   if(keyDown(RIGHT_ARROW)){
-		player.setSpeed(1,0);
+		player.mirrorX(1);
+		player.changeAnimation('moving');
+		player.setSpeed(2,0);
 		
 	}
+	background(color(153,255,255));
+	ground(700);
 	drawSprites();
 }
 function pipe(x,h){
